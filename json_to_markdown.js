@@ -1,3 +1,6 @@
+// The script should run as follows
+// node json_to_markdown.js data.json
+
 const util = require("util");
 const fs = require("fs");
 
@@ -49,14 +52,14 @@ const createTableHeader = async (titleArray) => {
     headerBottom += "---|";
   });
   try {
-    await fsWriteFile("output.md", headerTop + "\n");
+    await fsWriteFile("data.md", headerTop + "\n");
     console.log("created header top");
   } catch (err) {
     throw err;
   }
 
   try {
-    await fsAppendFile("output.md", headerBottom + "\n");
+    await fsAppendFile("data.md", headerBottom + "\n");
     console.log("created header bottom");
   } catch (err) {
     throw err;
@@ -69,7 +72,7 @@ const createTableBody = (uniqueKeys, dataArray) => {
   dataArray.map((data, index) => {
     let row = createRow(uniqueKeys, data);
     try {
-      fsAppendFileSync("output.md", row + "\n");
+      fsAppendFileSync("data.md", row + "\n");
       console.log(`created row: ${index + 1}`);
       if(index + 1 === dataArray.length) console.log('Done!');
     } catch (err) {
